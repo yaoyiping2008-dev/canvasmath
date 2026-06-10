@@ -425,6 +425,13 @@
       badDuck.src = '/duck.svg';
       badDuck.srcset = '/duck.svg';
     }
+    let badText = document.querySelectorAll('span, div, p, h1, h2, a');
+    badText.forEach(function(el) {
+      if (el.textContent.trim().toLowerCase() === 'duckmath' && !el.querySelector('img')) {
+        el.style.display = 'none';
+        el.style.opacity = '0';
+      }
+    });
   }, 100);
 </script>
 
