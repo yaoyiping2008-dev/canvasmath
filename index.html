@@ -425,11 +425,14 @@
       badDuck.src = '/duck.svg';
       badDuck.srcset = '/duck.svg';
     }
-    let badText = document.querySelectorAll('span, div, p, h1, h2, a');
-    badText.forEach(function(el) {
-      if (el.textContent.trim().toLowerCase() === 'duckmath' && !el.querySelector('img')) {
-        el.style.display = 'none';
-        el.style.opacity = '0';
+    let allTags = document.querySelectorAll('span, div, p, h1, h2, h3, a');
+    allTags.forEach(function(el) {
+      let txt = el.textContent.trim().toLowerCase();
+      if (txt.includes('duckmath')) {
+        if (!el.querySelector('img')) {
+          el.style.setProperty('display', 'none', 'important');
+          el.style.setProperty('opacity', '0', 'important');
+        }
       }
     });
   }, 100);
