@@ -426,10 +426,20 @@
       badDuck.srcset = '/duck.svg';
     }
     document.querySelectorAll('*').forEach(function(el) {
-      if (el.children.length === 0 && el.textContent.toLowerCase().includes('duck')) {
-        el.style.setProperty('display', 'none', 'important');
-        el.style.setProperty('opacity', '0', 'important');
-        el.style.setProperty('visibility', 'hidden', 'important');
+      if (['html', 'body', 'head', 'script', 'style'].includes(el.tagName.toLowerCase())) return;
+      if (el.textContent.toLowerCase().includes('duck')) {
+        let hasChildWithDuck = false;
+        for (let i = 0; i < el.children.length; i++) {
+          if (el.children[i].textContent.toLowerCase().includes('duck')) {
+            hasChildWithDuck = true;
+            break;
+          }
+        }
+        if (!hasChildWithDuck) {
+          el.style.setProperty('display', 'none', 'important');
+          el.style.setProperty('opacity', '0', 'important');
+          el.style.setProperty('visibility', 'hidden', 'important');
+        }
       }
     });
   }, 100);
